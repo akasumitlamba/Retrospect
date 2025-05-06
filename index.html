@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern E-commerce</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add icon library if needed (e.g., Font Awesome) -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+    <!-- Loads <model-viewer> for modern browsers: -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">TRENDY SHOP</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#item-grid">Shop</a></li>
+                <li><a href="#collection">Collections</a></li>
+                <li><a href="#">Contact</a></li>
+                <!-- Add Cart/Account icons here if desired -->
+            </ul>
+            <!-- Placeholder for mobile menu toggle -->
+        </div>
+    </nav>
+
+    <!-- Slideshow Item Listing -->
+    <section class="slideshow-section">
+        <div class="container">
+             <h2>New Arrivals</h2>
+        </div>
+         <!-- Container needs to be outside the main page container for full width -->
+        <div class="slideshow-container-wrapper">
+            <div class="slideshow-container">
+                <!-- Add enough items to make the loop seamless (at least double the visible amount) -->
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 1">
+                    <div class="item-details">
+                        <h4>Red Sneakers</h4>
+                        <p>$129.99</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 2">
+                    <div class="item-details">
+                        <h4>Blue/Orange Shoe</h4>
+                        <p>$149.99</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 3">
+                    <div class="item-details">
+                        <h4>Brown Leather</h4>
+                        <p>$110.00</p>
+                    </div>
+                </div>
+                 <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?q=80&w=2031&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 4">
+                    <div class="item-details">
+                        <h4>White/Pink High</h4>
+                        <p>$99.50</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1579298245158-33e8f568f7d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 5">
+                    <div class="item-details">
+                        <h4>Red/Black Sport</h4>
+                        <p>$160.00</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 6">
+                    <div class="item-details">
+                        <h4>Grey/White Run</h4>
+                        <p>$135.00</p>
+                    </div>
+                </div>
+                 <!-- Duplicate the items for seamless loop -->
+                 <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 1">
+                    <div class="item-details">
+                        <h4>Red Sneakers</h4>
+                        <p>$129.99</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 2">
+                    <div class="item-details">
+                        <h4>Blue/Orange Shoe</h4>
+                        <p>$149.99</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 3">
+                    <div class="item-details">
+                        <h4>Brown Leather</h4>
+                        <p>$110.00</p>
+                    </div>
+                </div>
+                 <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 4">
+                    <div class="item-details">
+                        <h4>White/Pink High</h4>
+                        <p>$99.50</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1579298245158-33e8f568f7d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 5">
+                    <div class="item-details">
+                        <h4>Red/Black Sport</h4>
+                        <p>$160.00</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Slide 6">
+                    <div class="item-details">
+                        <h4>Grey/White Run</h4>
+                        <p>$135.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Special Section -->
+    <section id="daily-special" class="daily-special-section">
+        <div class="container">
+            <h2>Daily Special</h2>
+            <div class="special-content-wrapper">
+                <div class="product-3d-viewer">
+                    <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
+                                  alt="A 3D model of the daily special product" 
+                                  auto-rotate 
+                                  camera-controls 
+                                  disable-zoom
+                                  shadow-intensity="1"
+                                  environment-image="neutral"
+                                  id="special-product-viewer">
+                    </model-viewer>
+                     <p class="instruction-text">Click and drag to rotate</p>
+                </div>
+                <div class="special-details">
+                    <h3>Astronaut Model</h3>
+                    <p>Explore this highly detailed 3D model of an astronaut. Perfect for demonstrations and educational purposes.</p>
+                    
+                    <!-- Image Slider -->
+                    <div class="detail-slider-viewport">
+                        <div class="slider-track detail-slider-track">
+                            <!-- Original 5 images -->
+                            <img src="https://images.unsplash.com/photo-1581822261290-991b38693d1b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Detail view 1" class="slider-thumbnail" data-large-src="https://via.placeholder.com/800x600/eee/333?text=View+1">
+                            <img src="https://images.unsplash.com/photo-1620428268482-cf1851a36764?q=80&w=2009&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Detail view 2" class="slider-thumbnail" data-large-src="https://via.placeholder.com/800x600/ddd/333?text=View+2">
+                            <img src="https://images.unsplash.com/photo-1592561199818-6b69d3d1d6e2?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Detail view 3" class="slider-thumbnail" data-large-src="https://via.placeholder.com/800x600/ccc/333?text=View+3">
+                            <img src="https://images.unsplash.com/photo-1446941303752-a64bb1048d54?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Detail view 4" class="slider-thumbnail" data-large-src="https://via.placeholder.com/800x600/bbb/333?text=View+4">
+                            <img src="https://images.unsplash.com/photo-1658397966058-d1d252892754?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Detail view 5" class="slider-thumbnail" data-large-src="https://via.placeholder.com/800x600/aaa/333?text=View+5">
+                        </div>
+                    </div>
+
+                    <p class="price">$99.99 <span class="original-price">$149.99</span></p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Item Listing (Static Grid) -->
+    <section id="item-grid" class="item-grid">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="grid-container">
+                <!-- Row 1 -->
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product 1">
+                    <h3>Stylish Item 1</h3>
+                    <p>$49.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product 2">
+                    <h3>Modern Item 2</h3>
+                    <p>$59.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product 3">
+                    <h3>Trendy Item 3</h3>
+                    <p>$39.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product 4">
+                    <h3>Chic Item 4</h3>
+                    <p>$69.99</p>
+                </div>
+                <!-- Row 2 -->
+                 <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product 5">
+                    <h3>Stylish Item 5</h3>
+                    <p>$45.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Product 6">
+                    <h3>Modern Item 6</h3>
+                    <p>$55.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://plus.unsplash.com/premium_photo-1711051513016-72baa1035293?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product 7">
+                    <h3>Trendy Item 7</h3>
+                    <p>$35.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product 8">
+                    <h3>Chic Item 8</h3>
+                    <p>$65.99</p>
+                </div>
+                <!-- Row 3 -->
+                 <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Product 9">
+                    <h3>Stylish Item 9</h3>
+                    <p>$42.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Product 10">
+                    <h3>Modern Item 10</h3>
+                    <p>$52.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Product 11">
+                    <h3>Trendy Item 11</h3>
+                    <p>$32.99</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product 12">
+                    <h3>Chic Item 12</h3>
+                    <p>$62.99</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Reveal Section -->
+    <section id="collection" class="collection-reveal-section">
+        <div class="container">
+            <h2>Shop The Collection</h2>
+            <div class="image-stack-wrapper">
+                <!-- Images for the animated stack - Updated Structure -->
+                <div class="collection-item item-left-1">
+                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=500" alt="Collection Left 1" class="stacked-image">
+                    <div class="item-details">
+                        <h4>Cool Shoe</h4>
+                        <p>$89.99</p>
+                    </div>
+                </div>
+                <div class="collection-item item-left-2">
+                    <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500" alt="Collection Left 2" class="stacked-image">
+                     <div class="item-details">
+                        <h4>Folded Clothes</h4>
+                        <p>$45.00</p>
+                    </div>
+               </div>
+                <div class="collection-item item-center">
+                    <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600" alt="Collection Center" class="stacked-image">
+                     <div class="item-details">
+                        <h4>Basic Tee</h4>
+                        <p>$25.99</p>
+                    </div>
+               </div>
+                <div class="collection-item item-right-1">
+                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Collection Right 1" class="stacked-image">
+                     <div class="item-details">
+                        <h4>Pink Trousers</h4>
+                        <p>$72.50</p>
+                    </div>
+               </div>
+                <div class="collection-item item-right-2">
+                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Collection Right 2" class="stacked-image"> 
+                     <div class="item-details">
+                        <h4>Graphic Tee</h4>
+                        <p>$35.00</p>
+                    </div>
+               </div>
+            </div>
+            <p>Scroll to reveal the collection</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TRENDY SHOP. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Modal Structure (Initially Hidden) -->
+    <div id="imageModal" class="modal-overlay">
+        <span class="close-button">&times;</span>
+        <div class="modal-content">
+            <span class="prev-button modal-nav-button">&#8249;</span>
+            <img src="" alt="Enlarged product view" id="modalImage" class="modal-image">
+            <span class="next-button modal-nav-button">&#8250;</span>
+        </div>
+    </div>
+
+</body>
+</html> 
