@@ -1,10 +1,14 @@
 :root {
-    --primary-color: #333;
-    --secondary-color: #f4f4f4;
-    --accent-color: #007bff; /* A trendy blue */
-    --font-family: 'Poppins', sans-serif; /* Modern sans-serif */
-    --border-radius: 8px;
+    --primary-color: #1a1a1a; /* Darker, softer black */
+    --secondary-color: #f8f9fa; /* Light grey for backgrounds */
+    --accent-color: #0056b3; /* Slightly deeper blue */
+    --text-color-light: #555; /* Lighter text for secondary info */
+    --border-color: #e0e0e0; /* Lighter border color */
+    --font-family: 'Poppins', sans-serif;
+    --border-radius: 6px; /* Slightly smaller radius */
     --transition-speed: 0.3s ease;
+    --box-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --box-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -15,9 +19,11 @@
 
 body {
     font-family: var(--font-family);
-    line-height: 1.6;
+    line-height: 1.7; /* Increased line height */
     color: var(--primary-color);
-    background-color: #fff; /* Clean white background */
+    background-color: #ffffff; /* Keep main background white for contrast */
+    -webkit-font-smoothing: antialiased; /* Smoother fonts */
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -33,17 +39,47 @@ img {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px; /* Slightly more padding */
+}
+
+/* General Section Styling */
+.slideshow-section,
+.daily-special-section,
+.item-grid,
+.collection-reveal-section {
+    padding-top: 5rem; /* Increased vertical padding */
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--border-color); /* Subtle separator */
+}
+.collection-reveal-section { /* Last section, no bottom border */
+    border-bottom: none;
+}
+
+h2 { /* Section Headings */
+    font-weight: 600;
+    margin-bottom: 3rem; /* More space below headings */
+    font-size: 2.2rem;
+    /* Apply animation to section headings */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+h2.is-visible { /* State when animation triggers */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Navbar */
 .navbar {
-    background-color: #fff; /* White navbar */
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .navbar .container {
@@ -53,8 +89,8 @@ img {
 }
 
 .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 700; /* Bolder brand */
     color: var(--primary-color);
 }
 
@@ -71,10 +107,66 @@ img {
     color: var(--primary-color);
     font-weight: 500;
     transition: color var(--transition-speed);
+    padding-bottom: 4px; /* Space for potential underline */
+    position: relative;
+}
+
+.nav-links a::after { /* Subtle underline hover effect */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width var(--transition-speed);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .nav-links a:hover {
-    color: var(--accent-color);
+     color: var(--primary-color); /* Keep color same, use underline */
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+/* Styles for the mobile navigation menu when active */
+.nav-links.active {
+    display: flex !important; /* Add !important for testing override */
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    padding: 1rem 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.nav-links.active li {
+    margin: 0;
+    text-align: center;
+}
+
+.nav-links.active li a {
+    display: block;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.nav-links.active li:last-child a {
+    border-bottom: none;
 }
 
 /* Item Listing Grid */
@@ -96,17 +188,18 @@ img {
 }
 
 .grid-item {
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     overflow: hidden;
-    text-align: center;
-    padding-bottom: 1rem;
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 
 .grid-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .grid-item img {
@@ -117,20 +210,37 @@ img {
 
 .grid-item h3 {
     font-size: 1.1rem;
-    margin: 0.8rem 0 0.3rem;
-    font-weight: 500;
+    margin: 0 0 0.4rem 0; /* Remove margin, use padding on container */
+    font-weight: 600;
+    text-align: left; 
 }
 
 .grid-item p {
     font-size: 1rem;
     font-weight: 600;
     color: var(--accent-color);
+    margin: 0;
+    text-align: left; 
+}
+
+/* NEW: Grid Item Details Styling */
+.grid-item-details {
+    padding: 0.8rem 1rem 1.2rem; /* Bottom padding handles the space */
+    background-color: #fff; 
+    transition: background-color var(--transition-speed);
+    border-top: 1px solid var(--border-color); 
+    flex-grow: 1; /* Allow details section to grow if needed */
+}
+
+/* Hover effect for grid item details */
+.grid-item:hover .grid-item-details {
+    background-color: rgba(26, 26, 26, 0.05); /* Subtle dark overlay */
 }
 
 /* Slideshow Item Listing */
 .slideshow-section {
     padding: 4rem 0;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* Use light grey */
     overflow: hidden; /* Important for slideshow */
 }
 
@@ -167,6 +277,7 @@ img {
     height: 200px; /* Adjust as needed */
     object-fit: cover;
     border-radius: var(--border-radius);
+    transition: transform var(--transition-speed);
 }
 
 /* Slideshow Item Details */
@@ -182,8 +293,10 @@ img {
     opacity: 0;
     transform: translateY(100%);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    font-size: 0.9rem; /* Adjust font size if needed */
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    font-size: 0.9rem; 
+    box-sizing: border-box; 
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .slideshow-item .item-details h4 {
@@ -200,9 +313,8 @@ img {
 
 /* Slideshow Item Hover Effects */
 .slideshow-item:hover {
-    transform: scale(1.05); /* Pop out effect */
-    z-index: 10; /* Bring to front */
-    transition-delay: 0s; /* Apply hover effects immediately */
+    z-index: 10; 
+    transition-delay: 0s; 
 }
 
 .slideshow-item:hover .item-details {
@@ -298,7 +410,7 @@ img {
     width: 33%; /* Slightly smaller */
     max-width: 270px; /* Smaller max */
     border-radius: var(--border-radius);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: var(--box-shadow-soft);
     overflow: hidden; /* Hide details initially if needed */
     /* Initial state: collapsed in center */
     opacity: 0;
@@ -358,7 +470,7 @@ img {
     transform: translate(-50%, -50%) scale(1.05) rotate(0deg); /* Reduced scale slightly */
     z-index: 3; /* Mid z-index */
     max-width: 330px; 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .image-stack-wrapper.is-visible .item-left-1 {
@@ -389,6 +501,7 @@ img {
 .image-stack-wrapper.is-visible .collection-item:hover {
     z-index: 10 !important; 
     transition-delay: 0s; 
+    box-shadow: var(--box-shadow-hover);
 }
 
 .image-stack-wrapper.is-visible .item-center:hover {
@@ -416,9 +529,8 @@ img {
 /* Footer */
 .footer {
     background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 2rem 0;
-    margin-top: 4rem;
+    color: rgba(255, 255, 255, 0.8); /* Lighter white */
+    padding: 3rem 0;
     text-align: center;
 }
 
@@ -450,17 +562,148 @@ img {
 /* Responsive */
 @media (max-width: 992px) {
     .grid-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     .slideshow-item {
         flex: 0 0 calc(100% / 2);
         max-width: calc(100% / 2);
     }
+    /* Adjust daily special layout */
+    .special-content-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .product-3d-viewer, .special-details {
+        flex-basis: auto; /* Reset flex basis */
+        width: 100%; /* Take full width when stacked */
+        max-width: 500px; /* Limit max width */
+        margin: 0 auto; /* Center */
+    }
+    .product-3d-viewer {
+        height: 400px; /* Adjust height */
+    }
+    .special-details {
+        text-align: center;
+    }
+    /* Adjust collection reveal - maybe stack earlier or simplify */
+    .image-stack-wrapper {
+        height: auto; /* Let content determine height */
+        min-height: 500px;
+        display: flex; /* Use flexbox for simpler stacking */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+        gap: 1rem;
+        perspective: none; /* Disable perspective */
+    }
+    .collection-item {
+        position: static; /* Remove absolute positioning */
+        opacity: 1; /* Make visible */
+        transform: none !important; /* Remove all transforms */
+        width: 45%; /* Two columns */
+        max-width: 220px;
+        margin-bottom: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+     /* Hide details initially, show on hover */
+    .collection-item .item-details {
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .collection-item:hover .item-details {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+
+    /* NEW: Collection Item Animation (Mobile) */
+    .collection-item {
+        opacity: 0; /* Start hidden */
+        transform: translateY(20px); /* Optional: slight upward movement */
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+    }
+     .collection-item.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* NEW: Media query for screens between ~14-inch and 16-inch */
+@media (max-width: 1440px) {
+    :root {
+        /* Reduce base font size for smaller screens */
+        font-size: 15px; /* Base font size reduced from 16px (browser default) */
+    }
+    .container {
+        max-width: 1050px; /* Further reduce container width */
+    }
+
+    /* Reduce section padding */
+    .slideshow-section,
+    .daily-special-section,
+    .item-grid,
+    .collection-reveal-section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    /* Change grid to 3 columns and reduce image height */
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        gap: 1.5rem; /* Keep gap reasonable */
+    }
+    .grid-item img {
+        height: 220px; /* Smaller images */
+    }
+
+     /* Adjust Daily Special Spacing & Size */
+    .special-content-wrapper {
+        gap: 1.5rem; /* Reduce gap further */
+    }
+    .product-3d-viewer {
+         height: 400px; /* Smaller viewer */
+    }
+    .special-details h3 {
+        font-size: 1.6rem; /* Slightly smaller heading */
+    }
+
+     /* Adjust Collection Reveal - smaller/closer */
+    .image-stack-wrapper {
+         height: 650px; /* Smaller stack */
+         margin-top: 1rem; /* Reduce top margin */
+    }
+     .collection-item {
+        width: 28%;
+        max-width: 230px; /* Smaller max */
+    }
+     /* Adjust final positions - bring them closer */
+    .image-stack-wrapper.is-visible .item-center {
+         transform: translate(-50%, -50%) scale(1) rotate(0deg);
+         max-width: 280px;
+    }
+    .image-stack-wrapper.is-visible .item-left-1 {
+         /* Closer Top-Left */
+         transform: translate(-105%, -85%) scale(0.9) rotate(-5deg);
+    }
+     .image-stack-wrapper.is-visible .item-left-2 {
+         /* Closer Bottom-Left */
+         transform: translate(-95%, 5%) scale(0.9) rotate(4deg);
+    }
+     .image-stack-wrapper.is-visible .item-right-1 {
+         /* Closer Top-Right */
+         transform: translate(5%, -90%) scale(0.9) rotate(6deg);
+    }
+     .image-stack-wrapper.is-visible .item-right-2 {
+         /* Closer Bottom-Right */
+         transform: translate(15%, 10%) scale(0.9) rotate(-4deg);
+     }
 }
 
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* Basic hide, implement toggle later */
+        display: none; /* Hide desktop links */
+    }
+    .mobile-menu-toggle {
+        display: block; /* Show burger icon */
     }
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
@@ -469,11 +712,83 @@ img {
         flex: 0 0 100%;
         max-width: 100%;
     }
+    .slideshow-item img {
+        height: 250px; /* Adjust height for single view */
+    }
+    .product-3d-viewer {
+        height: 320px; /* Slightly increase height */
+        min-height: 280px; /* Add minimum height */
+        max-width: 95%;
+        overflow: visible; /* Ensure model isn't clipped if it slightly overflows */
+    }
+    model-viewer {
+        min-height: 280px; /* Ensure viewer element itself has height */
+    }
+    .special-details {
+         max-width: 95%;
+    }
+    .collection-item {
+        width: 90%; /* Make items wider */
+        max-width: 300px; /* Increase max-width */
+    }
+    .collection-reveal-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .slideshow-item .item-details,
+    .collection-item .item-details {
+        font-size: 0.8rem;
+    }
+    .slideshow-item .item-details h4,
+    .collection-item .item-details h4 {
+        font-size: 0.85rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
 }
 
 @media (max-width: 576px) {
+    .container {
+        padding: 0 15px; /* Reduce side padding */
+    }
     .grid-container {
         grid-template-columns: 1fr;
+    }
+    .grid-item img {
+        height: 280px; /* Taller image for single column */
+    }
+    .product-3d-viewer {
+        height: 300px; /* Further reduce height */
+        max-width: 95%;
+    }
+    .special-details {
+         max-width: 95%;
+    }
+    .collection-item {
+        width: 80%; /* Wider items in single column view */
+        max-width: 250px;
+    }
+    .collection-reveal-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .slideshow-item .item-details,
+    .collection-item .item-details {
+        font-size: 0.8rem;
+    }
+    .slideshow-item .item-details h4,
+    .collection-item .item-details h4 {
+        font-size: 0.85rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+    .navbar-brand {
+        font-size: 1.3rem;
     }
 }
 
@@ -499,9 +814,9 @@ img {
 }
 
 .product-3d-viewer {
-    /* Adjust flex-basis for 1:1 ratio */
-    flex: 1 1 50%; 
-    width: auto; 
+    /* Enforce strict 50% width, don't grow or shrink */
+    flex: 0 0 50%; 
+    /* width: auto; /* Remove redundant width */
     height: 500px; 
     margin: 0; /* Remove auto margin */
     perspective: 1200px; /* Slightly adjust perspective if needed */
@@ -518,8 +833,8 @@ model-viewer {
 
 /* Style the details column */
 .special-details {
-    /* Adjust flex-basis for 1:1 ratio */
-    flex: 1 1 50%; 
+    /* Enforce strict 50% width, don't grow or shrink */
+    flex: 0 0 50%; 
     text-align: left;
 }
 
@@ -574,58 +889,76 @@ model-viewer {
     font-size: 0.9rem;
 }
 
-/* Detail Image Slider - Static Row */
+/* Detail Image Slider - Updated for JS control */
 .detail-slider-viewport { 
-    overflow: hidden; /* Still hide overflow if needed */
+    position: relative; /* Needed for positioning nav buttons */
+    overflow: hidden; 
     margin-bottom: 1.5rem;
     width: 100%; 
-    /* Remove scrollbar stuff if definitely not wanted */
 }
 
 .detail-slider-track { 
     display: flex; 
     gap: 0.8rem;
     width: max-content; /* Let content determine width */ 
-    /* Remove animation */
-    /* animation: slide-details 20s linear infinite; */
+    /* Ensure smooth transition when JS updates transform */
+    transition: transform 0.5s ease;
 }
-
-/* Remove pause on hover for track */
-/*
-.detail-slider-viewport:hover .detail-slider-track {
-     animation-play-state: paused;
-}
-*/
 
 .slider-thumbnail {
     height: 70px; 
-    width: 90px; /* Set fixed width */
-    object-fit: cover; /* Prevent image distortion */
+    width: 90px; 
+    object-fit: cover; 
     border-radius: 4px;
     cursor: pointer;
     border: 1px solid #eee;
     transition: border-color var(--transition-speed), transform var(--transition-speed);
-    flex-shrink: 0; /* Prevent images from shrinking */
-    position: relative; /* For item details positioning if added */
-    overflow: hidden; /* For item details */
+    flex-shrink: 0; 
+    position: relative; 
+    overflow: hidden; 
 }
-
-/* Remove the animation keyframes */
-/*
-@keyframes slide-details {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(calc(-1 * (70px + 0.8rem) * 5));
-    }
-}
-*/
 
 .slider-thumbnail:hover {
     border-color: var(--accent-color);
     transform: scale(1.05);
 }
+
+/* Detail Slider Navigation Buttons */
+.detail-slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10; 
+    border-radius: 4px;
+    user-select: none; 
+    transition: background-color 0.2s ease;
+}
+
+.detail-slider-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.detail-slider-nav.prev {
+    left: 5px;
+}
+
+.detail-slider-nav.next {
+    right: 5px;
+}
+
+/* Initially hide buttons on larger screens if swipe is enough */
+/* Or keep them always visible */
+/* @media (min-width: 769px) {
+    .detail-slider-nav {
+        display: none;
+    }
+} */
 
 /* Image Modal Styles */
 .modal-overlay {
@@ -712,4 +1045,29 @@ model-viewer {
 
 .close-button:hover {
     color: #ccc;
+}
+
+/* Collection Description Section */
+.collection-description-section {
+    padding: 3rem 0 4rem; /* Adjust padding */
+    background-color: var(--secondary-color); /* Light background */
+    text-align: center;
+    /* border-bottom: 1px solid var(--border-color); /* Remove border */
+}
+
+.collection-description-section h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.collection-description-section p {
+    max-width: 700px; /* Limit text width */
+    margin: 0 auto 1.5rem; /* Center text block */
+    line-height: 1.8;
+    color: var(--text-color-light);
+}
+
+.collection-description-section .btn {
+    margin-top: 1rem;
 } 
