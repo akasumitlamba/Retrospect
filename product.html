@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Retrospect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.png" alt="Retrospect Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+            </ul>
+            <button class="mobile-menu-toggle">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- Product Details -->
+    <section class="product-details">
+        <div class="container">
+            <div class="product-container">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="main-product-image" src="" alt="Product Image">
+                    </div>
+                    <div class="thumbnail-images">
+                        <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Thumbnail 1" class="thumbnail active">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Thumbnail 2" class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHByb2R1Y3QlMjBzaG9lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Thumbnail 3" class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?q=80&w=2031&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Thumbnail 4" class="thumbnail">
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 id="product-title">Red Sneakers</h1>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>(4.8/5) - 127 reviews</span>
+                    </div>
+                    
+                    <div class="product-price">
+                        <span class="current-price" id="product-price">$129.99</span>
+                        <span class="original-price">$149.99</span>
+                        <span class="discount">Save 13%</span>
+                    </div>
+
+                    <div class="product-description">
+                        <p>Premium quality sneakers with retro design. Made from high-grade materials for maximum comfort and durability. Perfect for both casual and athletic wear.</p>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="size-selection">
+                            <h3>Size</h3>
+                            <div class="size-buttons">
+                                <button class="size-btn" data-size="7">7</button>
+                                <button class="size-btn" data-size="8">8</button>
+                                <button class="size-btn active" data-size="9">9</button>
+                                <button class="size-btn" data-size="10">10</button>
+                                <button class="size-btn" data-size="11">11</button>
+                            </div>
+                        </div>
+
+                        <div class="color-selection">
+                            <h3>Color</h3>
+                            <div class="color-buttons">
+                                <button class="color-btn active" data-color="red" style="background-color: #ff0000;"></button>
+                                <button class="color-btn" data-color="blue" style="background-color: #0066cc;"></button>
+                                <button class="color-btn" data-color="black" style="background-color: #000000;"></button>
+                            </div>
+                        </div>
+
+                        <div class="quantity-selection">
+                            <h3>Quantity</h3>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" id="decrease-qty">-</button>
+                                <input type="number" id="quantity" value="1" min="1" max="10">
+                                <button class="qty-btn" id="increase-qty">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary" id="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-secondary" id="wishlist">
+                            <i class="fas fa-heart"></i> Add to Wishlist
+                        </button>
+                    </div>
+
+                    <div class="product-features">
+                        <div class="feature">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Free shipping on orders over $100</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-undo"></i>
+                            <span>30-day return policy</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure payment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <h2>You might also like</h2>
+            <div class="related-grid" id="related-products">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Retrospect. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="product.js"></script>
+</body>
+</html>
