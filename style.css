@@ -97,7 +97,7 @@ h2.is-visible { /* State when animation triggers */
 }
 
 .logo-img {
-    height: 40px;
+    height: 60px;
     width: auto;
     max-width: 200px;
     filter: invert(1);
