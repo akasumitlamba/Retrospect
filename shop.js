@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rating: 4.6,
             reviews: 89
         },
+        
         {
             id: 3,
             name: "Premium Watch",
@@ -527,4 +528,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
 
