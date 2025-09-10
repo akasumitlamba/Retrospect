@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rating: 4.8,
             reviews: 127
         },
+        
         {
             id: 2,
             name: "Leather Crossbody Bag",
@@ -526,3 +527,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
