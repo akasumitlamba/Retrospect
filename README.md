@@ -3,6 +3,7 @@ Bug Fixes in Progress
 A modern, responsiv
 e e-commerce website for fashion and lifestyle products. Built with HTML, CSS, and JavaScript.
 
+
 ## Features
 
 ### 🛍️ **Shop Page**
