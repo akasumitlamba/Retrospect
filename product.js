@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Product data (same as shop.js)
     const products = [
         {
+            
             id: 1,
             name: "Classic Aviator Sunglasses",
             price: 89.99,
@@ -540,3 +541,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
