@@ -1,6 +1,7 @@
 # Retrospect - Fashion E-commerce Website
 
 Bug Fixes in-Progress
+
 A modern, responsive e-commerce website for fashion and lifestyle products. Built with HTML, CSS, and JavaScript.
 
 
