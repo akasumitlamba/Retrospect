@@ -44,19 +44,21 @@ document.addEventListener('DOMContentLoaded', function() {
     function createWishlistItemElement(item, index) {
         const wishlistItem = document.createElement('div');
         wishlistItem.className = 'wishlist-item';
+        const rating = Number(item.rating) || 0;
+        const reviews = Number(item.reviews) || 0;
         
         wishlistItem.innerHTML = `
             <div class="item-image">
-                <img src="${item.image}" alt="${item.name}">
+                <img src="${item.image}" alt="${item.name}" onclick="viewProductFromWishlist(${item.id})" style="cursor:pointer" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
             </div>
             <div class="item-details">
-                <h3>${item.name}</h3>
+                <h3 onclick="viewProductFromWishlist(${item.id})" style="cursor:pointer">${item.name}</h3>
                 <p class="item-category">${item.category}</p>
                 <div class="item-rating">
                     <div class="stars">
-                        ${generateStars(item.rating)}
+                        ${generateStars(rating)}
                     </div>
-                    <span>(${item.reviews})</span>
+                    <span>(${reviews})</span>
                 </div>
                 <p class="item-price">$${item.price.toFixed(2)}</p>
                 ${item.originalPrice > item.price ? 
@@ -107,7 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: item.id,
                 name: item.name,
                 price: item.price,
+                originalPrice: item.originalPrice || item.price,
                 image: item.image,
+                category: item.category,
+                material: getMaterialByCategory(item.category),
                 quantity: 1
             });
         }
@@ -118,8 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     window.viewProductFromWishlist = function(productId) {
-        localStorage.setItem('currentProduct', productId);
-        window.location.href = 'product.html';
+        window.location.href = `product.html?id=${productId}`;
     };
 
     window.removeFromWishlist = function(index) {
@@ -170,6 +174,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.removeChild(notification);
             }, 300);
         }, 3000);
+    }
+
+    function getMaterialByCategory(category) {
+        const materials = {
+            'shoes': 'Leather/Synthetic',
+            'clothing': 'Cotton/Blend',
+            'accessories': 'Premium Materials'
+        };
+        return materials[category] || 'Premium Quality';
     }
 
     // Mobile menu toggle

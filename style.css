@@ -105,18 +105,26 @@ h2.is-visible { /* State when animation triggers */
 .nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
+    gap: 1.25rem;
 }
 
 .nav-links li {
-    margin-left: 1.5rem;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a {
     color: var(--primary-color);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.05rem;
     transition: color var(--transition-speed);
     padding-bottom: 4px; /* Space for potential underline */
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
 .nav-links a::after { /* Subtle underline hover effect */
@@ -451,22 +459,22 @@ h2.is-visible { /* State when animation triggers */
 }
 
 /* Details Styling */
-.item-details {
+.collection .item-details {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.95)); /* Much darker overlay */
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
     color: white;
     padding: 1.5rem;
     text-align: center;
     opacity: 0;
-    transform: translateY(100%); /* Start hidden below */
+    transform: translateY(100%);
     transition: opacity 0.4s ease, transform 0.4s ease;
-    backdrop-filter: blur(2px); /* Add slight blur for better text readability */
+    backdrop-filter: blur(2px);
 }
 
-.item-details h4 {
+.collection .item-details h4 {
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
     font-weight: 700;
@@ -474,7 +482,7 @@ h2.is-visible { /* State when animation triggers */
     color: #ffffff;
 }
 
-.item-details p {
+.collection .item-details p {
     font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff;
@@ -497,7 +505,7 @@ h2.is-visible { /* State when animation triggers */
 .image-stack-wrapper.is-visible .item-left-1 {
     /* Top-Left position */
     transform: translate(-130%, -85%) scale(1.0) rotate(-12deg); /* Consistent scale */
-    z-index: 2;
+    z-index: 2; 
     transition-delay: 0.1s;
 }
 
@@ -518,7 +526,7 @@ h2.is-visible { /* State when animation triggers */
 .image-stack-wrapper.is-visible .item-right-2 {
      /* Bottom-Right position */
      transform: translate(40%, 40%) scale(1.0) rotate(-10deg); /* Consistent scale */
-     z-index: 5;
+     z-index: 5; 
      transition-delay: 0.5s;
 }
 
@@ -1117,6 +1125,13 @@ model-viewer {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color var(--transition-speed);
+}
+
+.cart-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .cart-icon #cart-count {
@@ -1132,33 +1147,21 @@ model-viewer {
     font-weight: 600;
 }
 
-/* Notification */
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
+.cart-icon #wishlist-count {
+    background-color: var(--accent-color);
     color: white;
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
-    z-index: 10000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    max-width: 300px;
-    box-shadow: var(--box-shadow-hover);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.25rem;
 }
 
-.notification.show {
-    transform: translateX(0);
-}
-
-.notification.success {
-    background: #28a745;
-}
-
-.notification.error {
-    background: #dc3545;
-}
+/* Notification */
 
 /* ===== SHOP PAGE ===== */
 .shop-header {
@@ -1265,12 +1268,13 @@ model-viewer {
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
     font-size: 1rem;
-    transition: border-color var(--transition-speed);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .search-box input:focus {
     outline: none;
-    border-color: var(--accent-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
 .search-box button {
@@ -1317,6 +1321,9 @@ model-viewer {
 .tracking-results {
     max-width: 1000px;
     margin: 0 auto;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .order-summary {
@@ -1336,6 +1343,35 @@ model-viewer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+}
+
+.current-status-display {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.current-status-display h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.status-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: pulse 2s ease-in-out infinite;
 }
 
 .order-info p {
@@ -1384,10 +1420,25 @@ model-viewer {
     background: var(--border-color);
 }
 
+/* Animated progress bar along the timeline */
+.timeline-progress {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    transition: height 0.8s ease;
+}
+
 .timeline-item {
     position: relative;
     padding-left: 80px;
     margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .timeline-item:last-child {
@@ -1407,21 +1458,93 @@ model-viewer {
     align-items: center;
     justify-content: center;
     z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.timeline-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .timeline-item.completed .timeline-icon {
     background: var(--success-color);
     border-color: var(--success-color);
     color: white;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.timeline-item.current .timeline-icon {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    animation: currentPulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.timeline-item.pending .timeline-icon {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+.timeline-item.current .timeline-icon i {
+    color: white !important;
+}
+
+.timeline-item.pending .timeline-icon i {
+    color: #6c757d !important;
+}
+
+.timeline-item.appear {
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideInUp 0.8s ease forwards;
+}
+
+.timeline-item.completed .timeline-icon i {
+    color: white;
 }
 
 .timeline-icon i {
-    font-size: 1.2rem;
+    font-size: 1.4rem !important;
+    color: #333 !important;
+    display: block;
+    animation: pop 400ms ease both;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .timeline-content h3 {
     margin-bottom: 0.5rem;
     color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.current-badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.timeline-item.current .timeline-content h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.timeline-item.pending .timeline-content h3 {
+    color: #6c757d;
 }
 
 .timeline-content p {
@@ -1433,6 +1556,50 @@ model-viewer {
     font-size: 0.9rem;
     color: var(--muted-color);
     font-weight: 500;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideInUp {
+    0% { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes pulse {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); 
+    }
+    70% { 
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); 
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); 
+    }
+}
+
+@keyframes currentPulse {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); 
+        transform: scale(1.1);
+    }
+    50% { 
+        box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.3); 
+        transform: scale(1.15);
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); 
+        transform: scale(1.1);
+    }
 }
 
 .delivery-actions {
@@ -1510,23 +1677,24 @@ model-viewer {
     font-weight: bold;
 }
 
-/* Notification Styles */
+/* Notification Styles - Updated */
 .notification {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: white;
+    background: #333;
+    color: white;
     padding: 1rem 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    border-left: 4px solid var(--accent-color);
-    z-index: 1000;
+    z-index: 10000;
     transform: translateX(100%);
     transition: transform 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     min-width: 300px;
+    font-weight: 500;
 }
 
 .notification.show {
@@ -1534,11 +1702,13 @@ model-viewer {
 }
 
 .notification.success {
-    border-left-color: var(--success-color);
+    background: #28a745;
+    color: white;
 }
 
 .notification.error {
-    border-left-color: var(--danger-color);
+    background: #dc3545;
+    color: white;
 }
 
 .notification i {
@@ -1546,11 +1716,11 @@ model-viewer {
 }
 
 .notification.success i {
-    color: var(--success-color);
+    color: white;
 }
 
 .notification.error i {
-    color: var(--danger-color);
+    color: white;
 }
 
 /* Responsive Design for Tracker */
@@ -1966,6 +2136,23 @@ model-viewer {
     color: white;
 }
 
+/* Track CTA under cart */
+.cart-track-cta {
+    padding: 1.5rem 0 3rem;
+}
+
+.cart-track-cta .track-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-track-cta .hint {
+    margin-top: 0.5rem;
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+}
+
 .product-features {
     display: flex;
     flex-direction: column;
@@ -2013,9 +2200,9 @@ model-viewer {
 }
 
 .wishlist-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .wishlist-item {
@@ -2028,6 +2215,7 @@ model-viewer {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-soft);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    width: 100%;
 }
 
 .wishlist-item:hover {
@@ -2087,15 +2275,33 @@ model-viewer {
 
 .wishlist-item .item-actions {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    align-items: center;
     min-width: 150px;
 }
 
 .wishlist-item .item-actions .btn {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     font-size: 0.9rem;
     text-align: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Wishlist list view responsive behavior */
+@media (max-width: 768px) {
+    .wishlist-item {
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+    }
+    .wishlist-item .item-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
 }
 
 .btn-danger {

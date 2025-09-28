@@ -191,31 +191,90 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('order-date').textContent = formatDate(data.orderDate);
         document.getElementById('estimated-delivery').textContent = formatDate(data.estimatedDelivery);
         document.getElementById('delivery-address').textContent = data.deliveryAddress;
+        
+        // Add current status display
+        const currentStatusText = getCurrentStatusText(data.status);
+        let statusDisplay = document.getElementById('current-status');
+        if (!statusDisplay) {
+            statusDisplay = document.createElement('div');
+            statusDisplay.id = 'current-status';
+            statusDisplay.className = 'current-status-display';
+            document.querySelector('.order-details').insertBefore(statusDisplay, document.querySelector('.delivery-address'));
+        }
+        statusDisplay.innerHTML = `
+            <h3>Current Status: <span class="status-badge ${data.status}">${currentStatusText}</span></h3>
+        `;
 
-        // Update timeline
+        // Update timeline with animations
         const timeline = document.getElementById('tracking-timeline');
         timeline.innerHTML = '';
         
         data.timeline.forEach((item, index) => {
-            const timelineItem = createTimelineItem(item, index);
+            const timelineItem = createTimelineItem(item, index, data.timeline, data.status);
             timeline.appendChild(timelineItem);
+            // staggered appearance with longer delay for better visibility
+            setTimeout(() => {
+                timelineItem.classList.add('appear');
+                console.log(`Timeline item ${index} appeared`); // Debug log
+            }, 200 * (index + 1));
         });
 
-        // Show results
+        // Animate progress bar height up to the last completed item
+        const progress = document.getElementById('timeline-progress');
+        if (progress) {
+            const completedCount = data.timeline.filter(s => s.completed).length;
+            const total = data.timeline.length;
+            
+            // Wait for timeline to be fully rendered, then animate progress
+            setTimeout(() => {
+                const bounds = timeline.getBoundingClientRect();
+                const itemHeight = 100; // Approximate height per timeline item
+                const progressHeight = Math.max(0, (completedCount - 1) * itemHeight);
+                
+                progress.style.height = `${progressHeight}px`;
+                progress.style.transition = 'height 1.2s ease-out';
+                console.log(`Progress bar animated to ${progressHeight}px`); // Debug log
+            }, 1000);
+        }
+
+        // Show results with animation
         trackingResults.style.display = 'block';
+        trackingResults.style.opacity = '0';
+        trackingResults.style.transform = 'translateY(20px)';
         noResults.style.display = 'none';
+        
+        // Animate results container appearance
+        setTimeout(() => {
+            trackingResults.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            trackingResults.style.opacity = '1';
+            trackingResults.style.transform = 'translateY(0)';
+        }, 100);
     }
 
-    function createTimelineItem(item, index) {
+    function createTimelineItem(item, index, allTimelineItems, currentStatus) {
         const timelineItem = document.createElement('div');
-        timelineItem.className = `timeline-item ${item.completed ? 'completed' : ''}`;
+        
+        // Determine the status of this item
+        let itemClass = '';
+        if (item.completed) {
+            itemClass = 'completed';
+        } else if (item.status === currentStatus) {
+            itemClass = 'current';
+        } else {
+            itemClass = 'pending';
+        }
+        
+        timelineItem.className = `timeline-item ${itemClass}`;
+        
+        const iconClass = getStatusIcon(item.status);
+        console.log(`Creating timeline item ${index}: ${item.status} -> ${iconClass} (${itemClass})`); // Debug log
         
         timelineItem.innerHTML = `
             <div class="timeline-icon">
-                <i class="fas ${getStatusIcon(item.status)}"></i>
+                <i class="fas ${iconClass}"></i>
             </div>
             <div class="timeline-content">
-                <h3>${item.title}</h3>
+                <h3>${item.title}${item.status === currentStatus ? ' <span class="current-badge">CURRENT</span>' : ''}</h3>
                 <p>${item.description}</p>
                 ${item.timestamp ? `<span class="timeline-timestamp">${item.timestamp}</span>` : ''}
             </div>
@@ -228,12 +287,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const icons = {
             'order-placed': 'fa-shopping-cart',
             'processing': 'fa-cog',
-            'shipped': 'fa-shipping-fast',
+            'shipped': 'fa-truck',
             'in-transit': 'fa-truck',
-            'out-for-delivery': 'fa-box',
-            'delivered': 'fa-check-circle'
+            'out-for-delivery': 'fa-truck',
+            'delivered': 'fa-check'
         };
-        return icons[status] || 'fa-circle';
+        const iconClass = icons[status] || 'fa-circle';
+        console.log(`Icon for ${status}: ${iconClass}`);
+        return iconClass;
+    }
+
+    function getCurrentStatusText(status) {
+        const statusTexts = {
+            'order-placed': 'Order Placed',
+            'processing': 'Processing',
+            'shipped': 'Shipped',
+            'in-transit': 'In Transit',
+            'out-for-delivery': 'Out for Delivery',
+            'delivered': 'Delivered'
+        };
+        return statusTexts[status] || status;
     }
 
     function showNoResults() {
@@ -270,6 +343,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: 'Track My Order',
                 text: shareText,
                 url: window.location.href
+            }).catch(() => {
+                navigator.clipboard.writeText(shareText);
+                showNotification('Tracking info copied to clipboard!');
             });
         } else {
             navigator.clipboard.writeText(shareText).then(() => {
@@ -333,6 +409,24 @@ document.addEventListener('DOMContentLoaded', function() {
             element.textContent = count;
         });
     }
+
+    // Test Font Awesome icons
+    function testIcons() {
+        console.log('Testing Font Awesome icons...');
+        const testIcons = ['fa-shopping-cart', 'fa-cog', 'fa-truck', 'fa-check'];
+        testIcons.forEach(iconClass => {
+            const testEl = document.createElement('i');
+            testEl.className = `fas ${iconClass}`;
+            testEl.style.fontSize = '2rem';
+            testEl.style.color = 'red';
+            document.body.appendChild(testEl);
+            console.log(`Added test icon: ${iconClass}`);
+            setTimeout(() => document.body.removeChild(testEl), 1000);
+        });
+    }
+    
+    // Run icon test after page load
+    setTimeout(testIcons, 1000);
 
     // Initialize
     updateCartCount();

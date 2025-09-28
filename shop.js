@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 89.99,
             originalPrice: 129.99,
             category: "accessories",
-            image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            image: "https://picsum.photos/seed/s1/600/600",
             rating: 4.8,
             reviews: 127
         },
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 149.99,
             originalPrice: 199.99,
             category: "accessories",
-            image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGVhdGhlciUyMGJhZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            image: "https://picsum.photos/seed/s2/600/600",
             rating: 4.6,
             reviews: 89
         },
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 299.99,
             originalPrice: 399.99,
             category: "accessories",
-            image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            image: "https://picsum.photos/seed/s3/600/600",
             rating: 4.9,
             reviews: 203
         },
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 79.99,
             originalPrice: 99.99,
             category: "clothing",
-            image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVuaW0lMjBqYWNrZXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+            image: "https://picsum.photos/seed/s4/600/600",
             rating: 4.7,
             reviews: 156
         },
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 89.99,
             originalPrice: 119.99,
             category: "shoes",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://picsum.photos/seed/s5/600/600",
             rating: 4.5,
             reviews: 78
         },
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 29.99,
             originalPrice: 39.99,
             category: "clothing",
-            image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dCUyMHNoaXJ0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+            image: "https://picsum.photos/seed/s6/600/600",
             rating: 4.4,
             reviews: 92
         },
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 159.99,
             originalPrice: 199.99,
             category: "shoes",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://picsum.photos/300/300?random=5",
             rating: 4.8,
             reviews: 234
         },
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 139.99,
             originalPrice: 179.99,
             category: "shoes",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://picsum.photos/300/300?random=5",
             rating: 4.8,
             reviews: 187
         },
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: 169.99,
             originalPrice: 199.99,
             category: "shoes",
-            image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            image: "https://picsum.photos/300/300?random=5",
             rating: 4.9,
             reviews: 234
         }
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         card.innerHTML = `
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
                 ${discount > 0 ? `<span class="discount-badge">-${discount}%</span>` : ''}
                 <button class="quick-add" onclick="addToCart(${product.id})">
                     <i class="fas fa-shopping-cart"></i>

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         cartItem.innerHTML = `
             <div class="item-image">
-                <img src="${item.image}" alt="${item.name}" onclick="goToProduct(${item.id})" style="cursor: pointer;">
+                <img src="${item.image}" alt="${item.name}" onclick="goToProduct(${item.id})" style="cursor: pointer;" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
             </div>
             <div class="item-details">
                 <h3>${item.name}</h3>
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="item-quantity">
                 <label>Quantity:</label>
                 <div class="quantity-controls">
-                    <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                    <button class="qty-btn" onclick="window.updateQuantity(${index}, -1)">-</button>
                     <span class="qty-display">${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                    <button class="qty-btn" onclick="window.updateQuantity(${index}, 1)">+</button>
                 </div>
                 <small class="qty-limit">Max: 10</small>
             </div>
