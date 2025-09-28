@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     loadProduct();
     updateCartCount();
+    updateWishlistCount();
 
     function loadProduct() {
         const productId = parseInt(localStorage.getItem('currentProduct')) || 1;
@@ -309,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (currentProduct) {
             displayProduct(currentProduct);
+            checkWishlistStatus();
         }
     }
 
@@ -476,10 +478,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: currentProduct.id,
                 name: currentProduct.name,
                 price: currentProduct.price,
+                originalPrice: currentProduct.originalPrice,
                 image: currentProduct.availableColors[selectedColor],
+                category: currentProduct.category,
                 size: selectedSize,
                 color: selectedColor,
-                quantity: selectedQuantity
+                quantity: selectedQuantity,
+                material: getMaterialByCategory(currentProduct.category)
             });
         }
 
@@ -492,17 +497,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Wishlist
     wishlistBtn.addEventListener('click', () => {
-        wishlistBtn.classList.toggle('active');
-        const isActive = wishlistBtn.classList.contains('active');
+        if (!currentProduct) return;
+
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const existingItemIndex = wishlist.findIndex(item => item.id === currentProduct.id);
         
-        if (isActive) {
-            wishlistBtn.innerHTML = '<i class="fas fa-heart"></i> Added to Wishlist';
-            showNotification('Added to wishlist!');
-        } else {
+        if (existingItemIndex !== -1) {
+            // Remove from wishlist
+            wishlist.splice(existingItemIndex, 1);
+            wishlistBtn.classList.remove('active');
             wishlistBtn.innerHTML = '<i class="fas fa-heart"></i> Add to Wishlist';
             showNotification('Removed from wishlist!');
+        } else {
+            // Add to wishlist
+            wishlist.push({
+                id: currentProduct.id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                originalPrice: currentProduct.originalPrice,
+                image: currentProduct.images[0],
+                category: currentProduct.category,
+                rating: currentProduct.rating,
+                reviews: currentProduct.reviews
+            });
+            wishlistBtn.classList.add('active');
+            wishlistBtn.innerHTML = '<i class="fas fa-heart"></i> Added to Wishlist';
+            showNotification('Added to wishlist!');
         }
+
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlistCount();
     });
+
+    // Check if product is already in wishlist on load
+    function checkWishlistStatus() {
+        if (!currentProduct) return;
+        
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const isInWishlist = wishlist.find(item => item.id === currentProduct.id);
+        
+        if (isInWishlist) {
+            wishlistBtn.classList.add('active');
+            wishlistBtn.innerHTML = '<i class="fas fa-heart"></i> Added to Wishlist';
+        } else {
+            wishlistBtn.classList.remove('active');
+            wishlistBtn.innerHTML = '<i class="fas fa-heart"></i> Add to Wishlist';
+        }
+    }
 
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -511,6 +552,24 @@ document.addEventListener('DOMContentLoaded', function() {
         cartCountElements.forEach(element => {
             element.textContent = count;
         });
+    }
+
+    function updateWishlistCount() {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const count = wishlist.length;
+        const wishlistCountElements = document.querySelectorAll('#wishlist-count');
+        wishlistCountElements.forEach(element => {
+            element.textContent = count;
+        });
+    }
+
+    function getMaterialByCategory(category) {
+        const materials = {
+            'shoes': 'Leather/Synthetic',
+            'clothing': 'Cotton/Blend',
+            'accessories': 'Premium Materials'
+        };
+        return materials[category] || 'Premium Quality';
     }
 
     function showNotification(message) {

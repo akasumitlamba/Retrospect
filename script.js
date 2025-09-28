@@ -233,9 +233,49 @@ function showNotification(message) {
     }, 2000);
 }
 
-// Initialize cart count on page load
+// Wishlist functionality
+window.addToWishlist = function(productId) {
+    const product = homeProducts.find(p => p.id === productId);
+    if (!product) return;
+
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const existingItem = wishlist.find(item => item.id === productId);
+    
+    if (existingItem) {
+        showNotification('Item already in wishlist!');
+        return;
+    }
+
+    wishlist.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        originalPrice: product.originalPrice,
+        image: product.image,
+        category: product.category,
+        rating: product.rating,
+        reviews: product.reviews
+    });
+
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    updateWishlistCount();
+    showNotification('Added to wishlist!');
+};
+
+// Wishlist count functionality
+function updateWishlistCount() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const count = wishlist.length;
+    const wishlistCountElements = document.querySelectorAll('#wishlist-count');
+    wishlistCountElements.forEach(element => {
+        element.textContent = count;
+    });
+}
+
+// Initialize cart count and wishlist count on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
+    updateWishlistCount();
 });
 
 // Add specific logic for animations if needed beyond CSS

@@ -313,16 +313,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const productsGrid = document.getElementById('products-grid');
     const categoryFilter = document.getElementById('category-filter');
     const priceFilter = document.getElementById('price-filter');
-    const sortBtn = document.getElementById('sort-btn');
+    const sortDropdown = document.getElementById('sort-dropdown');
 
     // Initialize
     renderProducts(filteredProducts);
     updateCartCount();
+    updateWishlistCount();
 
     // Event listeners
     categoryFilter.addEventListener('change', filterProducts);
     priceFilter.addEventListener('change', filterProducts);
-    sortBtn.addEventListener('click', toggleSort);
+    sortDropdown.addEventListener('change', handleSortChange);
 
     function renderProducts(productsToRender) {
         productsGrid.innerHTML = '';
@@ -351,6 +352,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${discount > 0 ? `<span class="discount-badge">-${discount}%</span>` : ''}
                 <button class="quick-add" onclick="addToCart(${product.id})">
                     <i class="fas fa-shopping-cart"></i>
+                </button>
+                <button class="wishlist-add" onclick="addToWishlist(${product.id})">
+                    <i class="fas fa-heart"></i>
                 </button>
             </div>
             <div class="product-info">
@@ -389,6 +393,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return stars;
     }
 
+    function getMaterialByCategory(category) {
+        const materials = {
+            'shoes': 'Leather/Synthetic',
+            'clothing': 'Cotton/Blend',
+            'accessories': 'Premium Materials'
+        };
+        return materials[category] || 'Premium Quality';
+    }
+
     function filterProducts() {
         const category = categoryFilter.value;
         const priceRange = priceFilter.value;
@@ -417,25 +430,10 @@ document.addEventListener('DOMContentLoaded', function() {
         renderProducts(filteredProducts);
     }
 
-    function toggleSort() {
-        const sortOptions = ['default', 'price-low', 'price-high', 'name', 'rating'];
-        const currentIndex = sortOptions.indexOf(currentSort);
-        currentSort = sortOptions[(currentIndex + 1) % sortOptions.length];
-        
-        sortBtn.innerHTML = `<i class="fas fa-sort"></i> ${getSortLabel(currentSort)}`;
+    function handleSortChange() {
+        currentSort = sortDropdown.value;
         applySort();
         renderProducts(filteredProducts);
-    }
-
-    function getSortLabel(sort) {
-        const labels = {
-            'default': 'Sort',
-            'price-low': 'Price: Low to High',
-            'price-high': 'Price: High to Low',
-            'name': 'Name: A to Z',
-            'rating': 'Rating: High to Low'
-        };
-        return labels[sort];
     }
 
     function applySort() {
@@ -452,8 +450,17 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'rating':
                 filteredProducts.sort((a, b) => b.rating - a.rating);
                 break;
+            case 'newest':
+                // Sort by ID descending (assuming higher IDs are newer)
+                filteredProducts.sort((a, b) => b.id - a.id);
+                break;
+            case 'popular':
+                // Sort by number of reviews (more reviews = more popular)
+                filteredProducts.sort((a, b) => b.reviews - a.reviews);
+                break;
             default:
-                // Keep original order
+                // Keep original order (by ID ascending)
+                filteredProducts.sort((a, b) => a.id - b.id);
                 break;
         }
     }
@@ -473,8 +480,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: product.id,
                 name: product.name,
                 price: product.price,
+                originalPrice: product.originalPrice,
                 image: product.image,
-                quantity: 1
+                category: product.category,
+                quantity: 1,
+                material: getMaterialByCategory(product.category)
             });
         }
 
@@ -491,11 +501,48 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'product.html';
     };
 
+    window.addToWishlist = function(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const existingItem = wishlist.find(item => item.id === productId);
+        
+        if (existingItem) {
+            showNotification('Item already in wishlist!');
+            return;
+        }
+
+        wishlist.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            originalPrice: product.originalPrice,
+            image: product.image,
+            category: product.category,
+            rating: product.rating,
+            reviews: product.reviews
+        });
+
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlistCount();
+        showNotification('Added to wishlist!');
+    };
+
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const count = cart.reduce((total, item) => total + item.quantity, 0);
         const cartCountElements = document.querySelectorAll('#cart-count');
         cartCountElements.forEach(element => {
+            element.textContent = count;
+        });
+    }
+
+    function updateWishlistCount() {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const count = wishlist.length;
+        const wishlistCountElements = document.querySelectorAll('#wishlist-count');
+        wishlistCountElements.forEach(element => {
             element.textContent = count;
         });
     }

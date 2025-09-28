@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order - Retrospect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.png" alt="Retrospect Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="wishlist.html" class="cart-icon"><i class="fas fa-heart"></i> <span id="wishlist-count">0</span></a></li>
+                <li><a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+                <li><a href="tracker.html" class="cart-icon active"><i class="fas fa-truck"></i> Track</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- Tracker Header -->
+    <section class="tracker-header">
+        <div class="container">
+            <h1>Track Your Order</h1>
+            <p>Enter your tracking number to see the status of your delivery</p>
+        </div>
+    </section>
+
+    <!-- Tracker Content -->
+    <section class="tracker-content">
+        <div class="container">
+            <div class="tracker-search">
+                <div class="search-box">
+                    <input type="text" id="tracking-input" placeholder="Enter your tracking number (e.g., TRK123456789)" maxlength="20">
+                    <button id="track-btn" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Track Order
+                    </button>
+                </div>
+                <div class="sample-tracking">
+                    <p><strong>Sample tracking numbers:</strong></p>
+                    <div class="sample-numbers">
+                        <span class="sample-number" onclick="fillTrackingNumber('TRK123456789')">TRK123456789</span>
+                        <span class="sample-number" onclick="fillTrackingNumber('TRK987654321')">TRK987654321</span>
+                        <span class="sample-number" onclick="fillTrackingNumber('TRK555666777')">TRK555666777</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracking Results -->
+            <div class="tracking-results" id="tracking-results" style="display: none;">
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div class="order-details">
+                        <div class="order-info">
+                            <p><strong>Order Number:</strong> <span id="order-number">-</span></p>
+                            <p><strong>Tracking Number:</strong> <span id="tracking-number">-</span></p>
+                            <p><strong>Order Date:</strong> <span id="order-date">-</span></p>
+                            <p><strong>Estimated Delivery:</strong> <span id="estimated-delivery">-</span></p>
+                        </div>
+                        <div class="delivery-address">
+                            <h3>Delivery Address</h3>
+                            <p id="delivery-address">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tracking-timeline">
+                    <h2>Delivery Progress</h2>
+                    <div class="timeline" id="tracking-timeline">
+                        <!-- Timeline items will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <div class="delivery-actions">
+                    <button class="btn btn-secondary" onclick="printTracking()">
+                        <i class="fas fa-print"></i> Print Details
+                    </button>
+                    <button class="btn btn-secondary" onclick="shareTracking()">
+                        <i class="fas fa-share"></i> Share Tracking
+                    </button>
+                    <button class="btn btn-primary" onclick="contactSupport()">
+                        <i class="fas fa-headset"></i> Contact Support
+                    </button>
+                </div>
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <div class="no-results-content">
+                    <i class="fas fa-search"></i>
+                    <h2>No tracking information found</h2>
+                    <p>The tracking number you entered could not be found in our system.</p>
+                    <div class="help-options">
+                        <p><strong>Please check:</strong></p>
+                        <ul>
+                            <li>Your tracking number is correct</li>
+                            <li>You're using the right tracking number format</li>
+                            <li>The order was placed recently (allow 24 hours for processing)</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactSupport()">
+                            <i class="fas fa-headset"></i> Contact Support
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Retrospect. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="tracker.js"></script>
+</body>
+</html>

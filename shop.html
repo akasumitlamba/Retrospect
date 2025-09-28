@@ -22,7 +22,9 @@
                 <li><a href="shop.html" class="active">Shop</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="wishlist.html" class="cart-icon"><i class="fas fa-heart"></i> <span id="wishlist-count">0</span></a></li>
                 <li><a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+                <li><a href="tracker.html" class="cart-icon"><i class="fas fa-truck"></i> Track</a></li>
             </ul>
             <button class="mobile-menu-toggle">&#9776;</button>
         </div>
@@ -52,9 +54,15 @@
                     <option value="50-100">$50 - $100</option>
                     <option value="100+">Over $100</option>
                 </select>
-                <button id="sort-btn" class="sort-btn">
-                    <i class="fas fa-sort"></i> Sort
-                </button>
+                <select id="sort-dropdown" class="sort-dropdown">
+                    <option value="default">Sort by: Default</option>
+                    <option value="price-low">Sort by: Price (Low to High)</option>
+                    <option value="price-high">Sort by: Price (High to Low)</option>
+                    <option value="name">Sort by: Name (A to Z)</option>
+                    <option value="rating">Sort by: Rating (High to Low)</option>
+                    <option value="newest">Sort by: Newest First</option>
+                    <option value="popular">Sort by: Most Popular</option>
+                </select>
             </div>
         </div>
     </section>
